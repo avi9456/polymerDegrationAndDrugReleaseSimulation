@@ -1,0 +1,67 @@
+# Polymer Drug Release Simulation
+
+This project simulates drug release from a polymer network inside a 3D cubic lattice. It generates random polymer chains, fills the remaining volume with drug molecules, and then uses Monte Carlo steps to model drug diffusion and release.
+
+## What the program does
+
+- Creates a 3D cubic simulation space of size `spaceSize x spaceSize x spaceSize`.
+- Calculates the number of drug molecules and polymer monomers using the specified concentrations.
+- Generates random polymer chains inside the space using `randompolymer.py`.
+- Fills empty grid positions with drug molecules using `drug.py`.
+- Simulates the movement of drug molecules over Monte Carlo steps:
+  - A drug can move into empty space.
+  - A drug can move through polymer sites with a configurable permeability probability.
+  - A drug is considered released when it moves outside the simulation boundary.
+- Tracks release statistics and concentration profiles at selected time points.
+- Exports results to CSV files.
+
+## Main files
+
+- `simulation.py` - Main simulation routine and example run script.
+- `randompolymer.py` - Generates random polymer chains in the 3D grid.
+- `drug.py` - Places drug particles and simulates their motion and release.
+- `calculation.py` - Computes concentrations, release percentage `M(t)`, and spatial profiles.
+- `exportData.py` - Saves NumPy arrays to CSV files.
+- `visualization.py` - Builds a 3D plot of the polymer network and drug particles, then animates Monte Carlo drug diffusion in the simulation.
+
+## Usage
+
+Run the simulation from the command line:
+
+```bash
+python simulation.py
+```
+
+The default behavior in `simulation.py` runs 50 simulation trials and saves:
+
+- `report1/releaseData*.csv` - drug release history per Monte Carlo step
+- `report1/snapshots*.csv` - concentration profiles at selected MC steps
+
+## Parameters
+
+The main simulation parameters in `simulation.py` include:
+
+- `spaceSize` - the grid size for the 3D volume.
+- `drugCon` - fraction of the volume filled by drug.
+- `polymerCon` - fraction of the volume filled by polymer.
+- `permeablity` - probability that a drug particle can pass through a polymer site.
+- `MC_max` - number of Monte Carlo steps to simulate.
+- `maxPolymerSize` / `minPolyerSize` - polymer chain length range.
+
+## Output
+
+The simulation produces:
+
+- Cumulative drug release over time
+- The percentage of drug released `M(t)`
+- Drug concentration profiles across one dimension of the 3D space
+
+## Dependencies
+- simulation.py
+    - Python 3
+    - NumPy
+- visualization.py
+    - Python 3
+    - NumPy
+    - mathplot
+
