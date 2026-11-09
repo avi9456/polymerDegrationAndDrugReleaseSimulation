@@ -1,7 +1,8 @@
-__pycache__
-_report
-_report
-report1
+_*
+report*
+results*
 3dgrid.py
 *.csv
-try.py
+*.json
+*.png
+try*.py
